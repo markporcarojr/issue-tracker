@@ -11,7 +11,6 @@ datasource db {
   // relationMode = "prisma"
 }
 
-
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -66,12 +65,16 @@ model VerificationToken {
 }
 
 model Issue {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  // authorId  String
-  // author    User     @relation(fields: [authorId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  status      Status   @default(OPEN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
+enum Status {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}

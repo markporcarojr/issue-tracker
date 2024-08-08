@@ -1,3 +1,5 @@
+// UPDATED DOCS
+
 // import { PrismaClient } from "@prisma/client";
 
 // const prismaClientSingleton = () => {
@@ -13,6 +15,8 @@
 // if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
 
 // export default prisma;
+
+// MOSH APPROACH
 
 import { PrismaClient } from "@prisma/client";
 
