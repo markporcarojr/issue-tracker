@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import createIssueSchema from "./schema";
 import prisma from "@/prisma/client";
-
-// import { PrismaClient } from "@prisma/client";
-
-// const prisma = new PrismaClient();
+import { createIssueSchema } from "@/app/validationSchemas";
 
 export async function GET(request: NextRequest) {
   const issues = await prisma.issue.findMany();
