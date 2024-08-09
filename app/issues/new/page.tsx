@@ -1,6 +1,7 @@
 "use client";
 import { TextField, Button, Callout, Text } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
+import dynamic from "next/dynamic";
+// import SimpleMDE from "react-simplemde-editor";
 import { useForm, Controller } from "react-hook-form";
 import { FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
@@ -12,7 +13,10 @@ import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
-import delay from "delay";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 
 // Let zod infer the type based on the schema
 type IssueForm = z.infer<typeof createIssueSchema>;
@@ -22,8 +26,7 @@ type IssueForm = z.infer<typeof createIssueSchema>;
 //   description: string;
 // }
 
-const NewIssuePage = async () => {
-  await delay(2000);
+const NewIssuePage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
