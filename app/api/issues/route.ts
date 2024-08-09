@@ -23,3 +23,23 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(newIssue, { status: 201 });
 }
+
+export async function PUT(request: NextRequest) {
+  const body = await request.json();
+  const validation = createIssueSchema.safeParse(body);
+
+  if (!validation.success)
+    return NextResponse.json(validation.error.format(), { status: 400 });
+
+  const updatedIssue = await prisma.issue.update({
+    where: {
+      id: body.id,
+    },
+    data: {
+      title: body.title,
+      description: body.description,
+    },
+  });
+
+  return NextResponse.json(updatedIssue, { status: 201 });
+}
