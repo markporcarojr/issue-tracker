@@ -12,6 +12,7 @@ import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import delay from "delay";
 
 // Let zod infer the type based on the schema
 type IssueForm = z.infer<typeof createIssueSchema>;
@@ -21,7 +22,8 @@ type IssueForm = z.infer<typeof createIssueSchema>;
 //   description: string;
 // }
 
-const NewIssuePage = () => {
+const NewIssuePage = async () => {
+  await delay(2000);
   const router = useRouter();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
