@@ -14,7 +14,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
   const assignIssue = (userId: string) => {
     axios
-      .patch("/xapi/issues/" + issue.id, {
+      .patch("/api/issues/" + issue.id, {
         assignedToUserId: userId || null,
       })
       .catch(() => {
