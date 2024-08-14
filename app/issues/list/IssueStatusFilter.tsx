@@ -4,13 +4,27 @@ import { Select } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const statuses: { label: string; value?: Status }[] = [
+// const statuses: { label: string; value?: Status }[] = [
+//   { label: "All" },
+//   { label: "Open", value: "OPEN" },
+//   { label: "In Progress", value: "IN_PROGRESS" },
+//   { label: "Closed", value: "CLOSED" },
+// ];
+
+interface StatusOption {
+  label: string;
+  value?: Status;
+}
+
+const statuses: StatusOption[] = [
   { label: "All" },
   { label: "Open", value: "OPEN" },
   { label: "In Progress", value: "IN_PROGRESS" },
   { label: "Closed", value: "CLOSED" },
 ];
 
+// This component adds a query string to the url
+// so we can filter based on the query
 const IssueStatusFilter = () => {
   const router = useRouter();
   return (
