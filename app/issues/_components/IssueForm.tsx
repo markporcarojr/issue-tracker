@@ -14,10 +14,6 @@ import { FaInfoCircle } from "react-icons/fa";
 import SimpleMDE from "react-simplemde-editor";
 import { z } from "zod";
 
-// const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-//   ssr: false,
-// });
-
 // Let zod infer the type based on the schema
 type IssueFormData = z.infer<typeof issueSchema>;
 

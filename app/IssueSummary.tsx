@@ -29,7 +29,7 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
             >
               {container.label}
             </Link>
-            <Text size={"5"} className="font-bold">
+            <Text size={"5"} className="font-bold" align={"center"}>
               {container.value}
             </Text>
           </Flex>

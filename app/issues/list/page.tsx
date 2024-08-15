@@ -1,9 +1,10 @@
 import Pagination from "@/app/components/Pagination";
 import prisma from "@/prisma/client";
 import { Status } from "@prisma/client";
-import { Flex } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
 import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
+import { Metadata } from "next/types";
 
 // searchParams is a convention used by Next.js
 interface Props {
@@ -44,14 +45,22 @@ const IssuesPage = async ({ searchParams }: Props) => {
           currentPage={page}
           itemCount={issueCount}
         />
+        <Text weight="bold" size="2">
+          {issueCount} Issues Found
+        </Text>
       </Flex>
     </>
   );
 };
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issue List",
+  description: "View all of the project issues",
+};
 
 // controlled revalidate
-export const revalidate = 0;
+// export const revalidate = 0;
 
 export default IssuesPage;
