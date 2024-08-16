@@ -1,15 +1,14 @@
 "use client";
 import { Card } from "@radix-ui/themes";
 import {
-  ResponsiveContainer,
+  Bar,
   BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Bar,
-  CartesianGrid,
-  Tooltip,
-  Rectangle,
-  Legend,
 } from "recharts";
 
 interface Props {

@@ -1,19 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `authorId` on the `Issue` table. All the data in the column will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE `Issue` DROP FOREIGN KEY `Issue_authorId_fkey`;
-
--- AlterTable
-ALTER TABLE `Issue` DROP COLUMN `authorId`;
-
--- DropTable
-DROP TABLE `User`;
-
 -- CreateTable
 CREATE TABLE `accounts` (
     `id` VARCHAR(191) NOT NULL,
@@ -50,7 +34,6 @@ CREATE TABLE `users` (
     `name` VARCHAR(191) NULL,
     `email` VARCHAR(191) NULL,
     `email_verified` DATETIME(3) NULL,
-    `hashedPassword` VARCHAR(191) NULL,
     `image` VARCHAR(191) NULL,
 
     UNIQUE INDEX `users_email_key`(`email`),
@@ -66,8 +49,24 @@ CREATE TABLE `verificationtokens` (
     UNIQUE INDEX `verificationtokens_identifier_token_key`(`identifier`, `token`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `Issue` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `description` TEXT NULL,
+    `status` ENUM('OPEN', 'IN_PROGRESS', 'CLOSED') NOT NULL DEFAULT 'OPEN',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+    `assignedToUserId` VARCHAR(255) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `accounts` ADD CONSTRAINT `accounts_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Issue` ADD CONSTRAINT `Issue_assignedToUserId_fkey` FOREIGN KEY (`assignedToUserId`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
