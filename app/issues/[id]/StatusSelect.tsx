@@ -37,25 +37,29 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
     },
   });
 
-  const onSubmit = async (data: StatusFormData) => {
-    try {
-      setIsSubmitting(true);
-      await axios.patch("/api/issues/" + issue.id, data);
-      router.push("/issues/list");
-      router.refresh(); // Refresh page after adding new data
-    } catch (error) {
-      setError("An unexpected error has occurred.");
-    } finally {
-      setIsSubmitting(false); // Ensure this is set in both success and error cases
-    }
-  };
+  const onSubmit = useCallback(
+    async (data: StatusFormData) => {
+      try {
+        setIsSubmitting(true);
+        await axios.patch("/api/issues/" + issue.id, data);
+        router.push("/issues/list");
+        router.refresh(); // Refresh page after adding new data
+      } catch (error) {
+        setError("An unexpected error has occurred.");
+      } finally {
+        setIsSubmitting(false); // Ensure this is set in both success and error cases
+      }
+    },
+    [issue.id, router] // Include dependencies here
+  );
 
+  // Memoize handleValueChange to ensure it remains stable
   const handleValueChange = useCallback(
     (value: string) => {
       setValue("status", value as StatusValue);
       handleSubmit(onSubmit)(); // Trigger form submission
     },
-    [handleSubmit, onSubmit, setValue]
+    [handleSubmit, onSubmit, setValue] // Include dependencies here
   );
 
   return (
