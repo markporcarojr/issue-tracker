@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { userSchema } from "../validationSchemas";
-import { Button, Callout, Card, Flex, TextField } from "@radix-ui/themes";
+import { Button, Callout, Card, Flex, TextField, Text } from "@radix-ui/themes";
 import axios from "axios";
 import { FaInfoCircle } from "react-icons/fa";
 import { z } from "zod";
 import { ErrorMessage } from "../components";
 import { IoIosKey } from "react-icons/io";
 import { CiMail } from "react-icons/ci";
+import * as Label from "@radix-ui/react-label";
 
 type RegisterFormData = z.infer<typeof userSchema>;
 
@@ -55,6 +56,11 @@ const RegisterForm = () => {
 
         <Card size="3">
           <form className="space-y-3" onSubmit={onSubmit}>
+            <Text as="div" size={"7"} weight={"bold"} align="center">
+              Sign Up
+            </Text>
+
+            <Label.Root htmlFor="email">Email</Label.Root>
             <TextField.Root
               placeholder="Email"
               {...register("email", { required: true })}
@@ -64,32 +70,48 @@ const RegisterForm = () => {
               </TextField.Slot>
             </TextField.Root>
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
-            <TextField.Root
-              type="password"
-              placeholder="Password "
-              {...register("password", { required: true })}
+            <div className="space-y-3">
+              <Label.Root htmlFor="password">Password</Label.Root>
+              <TextField.Root
+                type="password"
+                placeholder="Password "
+                {...register("password", { required: true })}
+              >
+                <TextField.Slot>
+                  <IoIosKey />
+                </TextField.Slot>
+              </TextField.Root>
+              <ErrorMessage>{errors.password?.message}</ErrorMessage>
+            </div>
+            <div className="space-y-3">
+              <Label.Root htmlFor="confirmPassword">
+                Confirm Password
+              </Label.Root>
+              <TextField.Root
+                type="password"
+                placeholder="Confirm Password"
+                {...register("confirmPassword", { required: true })}
+              >
+                {" "}
+                <TextField.Slot>
+                  <IoIosKey />
+                </TextField.Slot>
+              </TextField.Root>
+              <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+            </div>
+            <hr
+              style={{
+                margin: "16px 0",
+                border: "none",
+                borderTop: "1px solid #ccc",
+              }}
+            />
+            <Button
+              disabled={isSubmitting}
+              style={{ width: "100%", marginTop: "0" }}
             >
-              <TextField.Slot>
-                <IoIosKey />
-              </TextField.Slot>
-            </TextField.Root>
-            <ErrorMessage>{errors.password?.message}</ErrorMessage>
-            <TextField.Root
-              type="password"
-              placeholder="Confirm Password"
-              {...register("confirmPassword", { required: true })}
-            >
-              {" "}
-              <TextField.Slot>
-                <IoIosKey />
-              </TextField.Slot>
-            </TextField.Root>
-            <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
-            <Flex direction="column" gap="3" align="center">
-              <Button disabled={isSubmitting}>
-                Submit {isSubmitting && <Spinner />}
-              </Button>
-            </Flex>
+              Submit {isSubmitting && <Spinner />}
+            </Button>
           </form>
         </Card>
       </div>

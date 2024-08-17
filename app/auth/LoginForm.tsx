@@ -11,6 +11,7 @@ import { z } from "zod";
 import { userSchema } from "../validationSchemas";
 import { getProviders } from "next-auth/react";
 import Link from "next/link";
+import * as Label from "@radix-ui/react-label";
 
 type LoginFormData = z.infer<typeof userSchema>;
 
@@ -74,26 +75,36 @@ const LoginForm = () => {
         )}
         <Card size="3">
           <form className="space-y-3" onSubmit={onSubmit}>
-            <TextField.Root
-              placeholder="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            >
-              <TextField.Slot>
-                <CiMail />
-              </TextField.Slot>
-            </TextField.Root>
-            <TextField.Root
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            >
-              <TextField.Slot>
-                <IoIosKey />
-              </TextField.Slot>
-            </TextField.Root>
+            <Text as="div" size={"7"} weight={"bold"} align="center">
+              Login
+            </Text>
+            <div className="space-y-3">
+              <Label.Root htmlFor="email">Email</Label.Root>
+              <TextField.Root
+                placeholder="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mb-10"
+              >
+                <TextField.Slot>
+                  <CiMail />
+                </TextField.Slot>
+              </TextField.Root>
+            </div>
+            <div className="space-y-3">
+              <Label.Root htmlFor="password">Password</Label.Root>
+              <TextField.Root
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              >
+                <TextField.Slot>
+                  <IoIosKey />
+                </TextField.Slot>
+              </TextField.Root>
+            </div>
             <hr
               style={{
                 margin: "16px 0",
@@ -102,7 +113,11 @@ const LoginForm = () => {
               }}
             />
             <Flex direction="column" gap="3" align="center">
-              <Button disabled={isSubmitting} type="submit">
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+                style={{ width: "100%" }}
+              >
                 Sign in {isSubmitting && <Spinner />}
               </Button>
 
@@ -110,7 +125,7 @@ const LoginForm = () => {
                 type="button"
                 onClick={() => signIn("google", { callbackUrl: "/" })}
                 aria-label="Sign in with Google"
-                className="flex items-center gap-3 bg-violet-600 rounded-md p-0.5 pr-3 transition-colors duration-300 hover:bg-violet-900"
+                className="flex items-center gap-3 bg-violet-600 rounded-md p-0.5 pr-3 transition-colors duration-300 hover:bg-violet-900 w-full"
               >
                 <div className="flex items-center justify-center bg-white w-9 h-9 rounded-l">
                   <svg

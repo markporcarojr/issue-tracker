@@ -19,9 +19,9 @@ interface Props {
 
 const IssueChart = ({ open, inProgress, closed }: Props) => {
   const data = [
-    { label: "Open", count: open },
-    { label: "In Progress", count: inProgress },
-    { label: "Closed", count: closed },
+    { label: "Open", issues: open },
+    { label: "In Progress", issues: inProgress },
+    { label: "Closed", issues: closed },
   ];
   return (
     <Card>
@@ -32,7 +32,7 @@ const IssueChart = ({ open, inProgress, closed }: Props) => {
           <Tooltip />
           <Legend />
           <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey={"count"} fill="#6e56cf" />
+          <Bar dataKey={"issues"} fill="#6e56cf" />
         </BarChart>
       </ResponsiveContainer>
     </Card>
