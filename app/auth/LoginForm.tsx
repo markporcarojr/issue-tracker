@@ -82,6 +82,7 @@ const LoginForm = () => {
             <div className="space-y-3">
               <Label.Root htmlFor="email">Email</Label.Root>
               <TextField.Root
+                id="email"
                 placeholder="Email"
                 type="email"
                 value={email}
@@ -96,6 +97,7 @@ const LoginForm = () => {
             <div className="space-y-3">
               <Label.Root htmlFor="password">Password</Label.Root>
               <TextField.Root
+                id="password"
                 placeholder="Password"
                 type="password"
                 value={password}

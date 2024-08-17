@@ -94,6 +94,9 @@ const AuthStatus = () => {
           <DropdownMenu.Item>
             <Link href="/api/auth/signout">Log out</Link>
           </DropdownMenu.Item>
+          <DropdownMenu.Item>
+            <Link href="/auth/update-password">Update password</Link>
+          </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </Box>

@@ -47,3 +47,22 @@ export const userSchema = z
       });
     }
   });
+
+export const patchUserSchema = z
+  .object({
+    email: z.string().email().optional(),
+    password: z.string().regex(passwordRegex, {
+      message:
+        "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a digit, and a special character.",
+    }),
+    confirmPassword: z.string(),
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords do not match",
+        path: ["confirmPassword"],
+      });
+    }
+  });

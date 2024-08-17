@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { userSchema } from "../validationSchemas";
+import { patchUserSchema, userSchema } from "../validationSchemas";
 import { Button, Callout, Card, Text, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import { FaInfoCircle } from "react-icons/fa";
@@ -13,7 +13,7 @@ import { ErrorMessage } from "../components";
 import * as Label from "@radix-ui/react-label";
 import { IoIosKey } from "react-icons/io";
 
-type UpdatePasswordFormData = z.infer<typeof userSchema>;
+type UpdatePasswordFormData = z.infer<typeof patchUserSchema>;
 
 const UpdatePasswordForm = () => {
   const router = useRouter();
@@ -24,13 +24,13 @@ const UpdatePasswordForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<UpdatePasswordFormData>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(patchUserSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
-      await axios.patch("/api/users", data);
+      await axios.put("/api/auth/update-password", data);
       router.push("/");
       // Use this to refresh page after adding new data
       router.refresh();
@@ -60,6 +60,7 @@ const UpdatePasswordForm = () => {
             <div className="space-y-3">
               <Label.Root htmlFor="password">New Password</Label.Root>
               <TextField.Root
+                id="password"
                 placeholder="Password"
                 type="password"
                 {...register("password", { required: true })}
@@ -76,6 +77,7 @@ const UpdatePasswordForm = () => {
                 Confirm Password
               </Label.Root>
               <TextField.Root
+                id="confirmPassword"
                 placeholder="Confirm Password"
                 type="password"
                 {...register("confirmPassword", { required: true })}
@@ -94,6 +96,7 @@ const UpdatePasswordForm = () => {
               }}
             />
             <Button
+              type="submit"
               disabled={isSubmitting}
               style={{ marginTop: "0", width: "100%" }}
             >

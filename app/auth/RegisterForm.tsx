@@ -62,6 +62,7 @@ const RegisterForm = () => {
 
             <Label.Root htmlFor="email">Email</Label.Root>
             <TextField.Root
+              id="email"
               placeholder="Email"
               {...register("email", { required: true })}
             >
@@ -73,6 +74,7 @@ const RegisterForm = () => {
             <div className="space-y-3">
               <Label.Root htmlFor="password">Password</Label.Root>
               <TextField.Root
+                id="password"
                 type="password"
                 placeholder="Password "
                 {...register("password", { required: true })}
@@ -88,6 +90,7 @@ const RegisterForm = () => {
                 Confirm Password
               </Label.Root>
               <TextField.Root
+                id="confirmPassword"
                 type="password"
                 placeholder="Confirm Password"
                 {...register("confirmPassword", { required: true })}
