@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -13,6 +14,7 @@
 }
 
 body {
+  font-family: var(--font-poppins), sans-serif;
   color: rgb(var(--foreground-rgb));
 }
 
