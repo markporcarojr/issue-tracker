@@ -50,6 +50,7 @@ model User {
   accounts       Account[]
   sessions       Session[]
   assignedIssues Issue[]
+  hashedPassword String?
 
   @@map("users")
 }

@@ -33,7 +33,9 @@ const LatestIssues = async () => {
                   {issue.assignedToUser && (
                     <Avatar
                       src={issue.assignedToUser.image!}
-                      fallback="?"
+                      fallback={((str: string) => str.charAt(0).toUpperCase())(
+                        issue.assignedToUser.email!
+                      )}
                       size="2"
                       radius="full"
                     ></Avatar>

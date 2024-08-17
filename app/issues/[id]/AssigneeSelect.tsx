@@ -35,7 +35,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
             <Select.Item value={null as any}>Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
-                {user.name}
+                {user.name || user.email}
               </Select.Item>
             ))}
           </Select.Group>

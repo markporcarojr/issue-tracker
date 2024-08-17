@@ -72,19 +72,25 @@ const AuthStatus = () => {
     <Box>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <Avatar
-            src={session!.user!.image!}
-            fallback="?"
-            size={"2"}
-            radius="full"
-            className="cursor-pointer"
-          />
+          {session?.user?.image ? (
+            <Avatar
+              src={session?.user?.image}
+              fallback="?"
+              size="2"
+              radius="full"
+              className="cursor-pointer"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <Text as="p" color="violet" style={{ cursor: "pointer" }}>
+              {session?.user?.email}
+            </Text>
+          )}
         </DropdownMenu.Trigger>
-        <DropdownMenu.Content variant="solid">
+        <DropdownMenu.Content>
           <DropdownMenu.Label>
             <Text size="2">{session!.user!.email}</Text>
           </DropdownMenu.Label>
-          <DropdownMenu.Separator />
           <DropdownMenu.Item>
             <Link href="/api/auth/signout">Log out</Link>
           </DropdownMenu.Item>

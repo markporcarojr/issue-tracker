@@ -60,7 +60,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           defaultValue={issue?.title}
           {...register("title", { required: true })}
         ></TextField.Root>
-        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>xs
         {/* You can customize the SimpleMDE */}
         <Controller
           name="description"
@@ -71,7 +71,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-
         <Button disabled={isSubmitting}>
           {issue ? "Update Issue" : "Submit New Issue"}{" "}
           {isSubmitting && <Spinner />}
