@@ -78,6 +78,7 @@ const LoginForm = () => {
             <Text as="div" size={"7"} weight={"bold"} align="center">
               Login
             </Text>
+
             <div className="space-y-3">
               <Label.Root htmlFor="email">Email</Label.Root>
               <TextField.Root
