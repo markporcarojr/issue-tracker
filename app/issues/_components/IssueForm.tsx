@@ -60,7 +60,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           defaultValue={issue?.title}
           {...register("title", { required: true })}
         ></TextField.Root>
-        <ErrorMessage>{errors.title?.message}</ErrorMessage>xs
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         {/* You can customize the SimpleMDE */}
         <Controller
           name="description"
