@@ -20,8 +20,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const providers = getProviders();
-  console.log(providers);
+  // const providers = getProviders();
+  // console.log(providers);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

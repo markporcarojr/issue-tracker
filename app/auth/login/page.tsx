@@ -1,6 +1,5 @@
-import React from "react";
+import { Flex } from "@radix-ui/themes";
 import LoginForm from "../LoginForm";
-import { Flex, Text } from "@radix-ui/themes";
 
 const LoginPage = () => {
   return (
